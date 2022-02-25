@@ -10,6 +10,10 @@ router.get('/new', (req,res)=>{
     res.render('users/new.ejs')
 })
 
+router.get('/profile', (req,res)=>{
+    res.render('users/profile.ejs')
+})
+
 //POST /users
 router.post('/', async (req,res)=>{
     const [newUser, created] = await db.user.findOrCreate({
@@ -34,7 +38,7 @@ router.post('/', async (req,res)=>{
 })
 
 router.get('/login', (req,res)=>{
-    res.render('users/login.ejs')
+    res.render('users/login.ejs', {error: null})
 })
 
 router.post('/login', async (req,res)=>{
