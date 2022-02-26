@@ -9,3 +9,14 @@ After speaking with many teachers it seems that keeping track of which students 
 ## ERDs
 
 ![an ERD of my project](./hallpassERD.drawio.png)
+
+## Routes
+
+| Method | Path           | Purpose                                                  |
+|--------|----------------|----------------------------------------------------------|
+| GET    | `/`            | Landing Page - Display landing and links to log in       |
+| GET    | `/classes`     | class page that lists all classes the user has access to |
+| POST   | `/classes`     | creates new class, redirects to `GET /classes`           |
+| GET    | `/classes/new` | page that has form for creating new                      |
+| GET    | `/classes/:id` | page that lists all students in a specific class         |
+|        |                |                                                          |
