@@ -1,4 +1,4 @@
-# spring forward project 2
+# Hall
 
 ## Concept
 
@@ -12,11 +12,18 @@ After speaking with many teachers it seems that keeping track of which students 
 
 ## Routes
 
-| Method | Path           | Purpose                                                  |
-|--------|----------------|----------------------------------------------------------|
-| GET    | `/`            | Landing Page - Display landing and links to log in       |
-| GET    | `/classes`     | class page that lists all classes the user has access to |
-| POST   | `/classes`     | creates new class, redirects to `GET /classes`           |
-| GET    | `/classes/new` | page that has form for creating new                      |
-| GET    | `/classes/:id` | page that lists all students in a specific class         |
-|        |                |                                                          |
+| Method | Path            | Purpose                                                             |
+|--------|-----------------|---------------------------------------------------------------------|
+| GET    | `/`             | Landing Page - Display landing and links to log in                  |
+| GET    | `/classes`      | class page that lists all classes the user has access to            |
+| POST   | `/classes`      | creates new class, redirects to `GET /classes`                      |
+| GET    | `/classes/new`  | page that has form for creating new class                           |
+| GET    | `/classes/:id`  | page that lists all students in a specific class                    |
+| PATCH  | `/class/:id`    | page to update a pre-existing class, redirects to `get /class`      |
+| GET    | `/students`     | page that lists all students                                        |
+| POST   | `/students`     | creates new student, redirects to `GET /students`                   |
+| GET    | `/students/new` | page that has form for creating new student                         |
+| GET    | `/students/:id` | page to list details on specific student                            |
+| PATCH  | `/students/:id` | page to update a pre-existing student, redirects to `GET /students` |
+| DELETE | `/students/:id` | page to delete a specific student. redirects to `GET /students`     |
+|        |                 |                                                                     |
