@@ -1,8 +1,8 @@
-# Hall
+# Hall Pass
 
 ## Concept
 
-After speaking with many teachers it seems that keeping track of which students are using the hallpass, and when each student is using a hallpass can quickly become a nightmare.  This HallPass app is here to help save some time and energy!  Each teacher will have access to each class they teach individually, as well as each student in those classes.  The teachers will be able to select a student in the class they're currently teaching to mark them as using the hall pass.  To reward the student for returning, they'll be given a dad joke!
+*  After speaking with many teachers it seems that keeping track of which students are using the hallpass, and when each student is using a hallpass can quickly become a nightmare.  This HallPass app is here to help save some time and energy!  Each teacher will have access to each class they teach individually, as well as each student in those classes.  The teachers will be able to select a student in the class they're currently teaching to mark them as using the hall pass.  To reward the student for returning, they'll be given a dad joke!  The time each student spends with the hall pass will be logged for easy viewing.
 
 
 
@@ -31,3 +31,27 @@ After speaking with many teachers it seems that keeping track of which students 
 ## Wireframe
 
 ![first draft of wireframe views](./wireframe.png)
+
+## MVP Goals
+
+* Create website where teachers can store a classroom of students
+
+* User ability to create new classrooms
+
+* User ability to create new students
+
+* User ability to delete classes
+
+* Ability to check students in and out of classroom with a "hallpass"
+
+* View each students hall pass usage
+
+
+
+## Stretch Goals
+
+* View details of students hall pass usage 
+
+* Neat and clean styling 
+
+* Ability for user to arrange students on `/classes/:id` page
