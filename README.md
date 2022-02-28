@@ -4,7 +4,11 @@
 
 *  After speaking with many teachers it seems that keeping track of which students are using the hallpass, and when each student is using a hallpass can quickly become a nightmare.  This HallPass app is here to help save some time and energy!  Each teacher will have access to each class they teach individually, as well as each student in those classes.  The teachers will be able to select a student in the class they're currently teaching to mark them as using the hall pass.  To reward the student for returning, they'll be given a dad joke!  The time each student spends with the hall pass will be logged for easy viewing.
 
+## user stories
 
+* As a teacher of many high school classes, i want an easy-to-use app to track which students are currently in the classroom and which are on a hall pass.
+
+* As a teacher of many classes, i want to be able to pick one student and look at their hall pass history
 
 ## ERDs
 
