@@ -25,5 +25,10 @@ router.get('/new',(req,res)=>{
     res.render('classrooms/new.ejs')
 })
 
+// GET /classrooms/:id
+router.get('/:id',(req,res)=>{
+    res.render('classrooms/show.ejs')
+})
+
 
 module.exports = router
