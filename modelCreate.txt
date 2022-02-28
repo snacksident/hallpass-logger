@@ -1,14 +1,14 @@
 sequelize model:create --name user --attributes email:string,password:string
 
 
-creating class model table
-sequelize model:create --name class --attributes userId:integer,class_name:string
+creating classroom model table
+sequelize model:create --name classroom --attributes userId:integer,class_name:string
 
 creating students model table
 sequelize model:create --name student --attributes classId:integer,first_name:string,last_name:string
 
 creating class_students join table / model
-sequelize model:create --name classes_students --attributes classId:integer,studentId:integer
+sequelize model:create --name classrooms_students --attributes classId:integer,studentId:integer
 
 creating hallpass table/model
 sequelize model:create --name hallpass --attributes classId:integer,studentId:integer,start_time:date,end_time:date

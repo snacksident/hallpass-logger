@@ -11,11 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      //has associations
-      models.classroom.hasMany(model.student,{through: classes_students})
+      //M:M association with students via classrooms_students join table
+      models.classroom.belongsToMany(models.student, {through: 'classrooms_students'})
 
-      //belongs-to associations 
-      models.classroom.belongsTo(model.hallpass)
+      //1:M assoc with hallpass
+      models.classroom.belongsTo(models.hallpass)
+      //1:M assoc with user
       models.classroom.belongsTo(models.user)
     }
   }
