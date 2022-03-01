@@ -2,7 +2,6 @@
 <a href="/classrooms/new">add new classroom here</a>
 <h2>Classes:</h2>
 <ul>
-    <%- classList %> 
     <% classList.forEach(classroom => { %>
      <li>
          <a href = "/classrooms/<%- classroom.id %> "> <%- classroom.class_name %> </a>
