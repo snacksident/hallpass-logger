@@ -48,7 +48,14 @@ router.get('/new',(req,res)=>{
 
 // GET /classrooms/:id
 router.get('/:id',async (req,res)=>{
-    res.render('classrooms/show.ejs')
+    const usersClassroom = await db.classroom.findOne({
+        where:{
+            id: req.params.id
+        }
+    })
+    const studentsInClass = await usersClassroom.getStudents()
+    console.log(studentsInClass)
+    res.render('classrooms/show.ejs',{usersClassroom, studentsInClass})
 })
 
 

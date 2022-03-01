@@ -1,2 +1,15 @@
 <h1>hit the show classrooms route</h1>
 <h2>viewing info about  </h2>
+
+
+ <h3>
+     <%- usersClassroom.class_name %> 
+ </h3>
+ <h4>list of students that have been added to this classroom:</h4>
+<ul>
+    <% studentsInClass.forEach(student => { %>
+     <li>
+         <%- student.last_name %>, <%- student.first_name %> 
+     </li>
+    <% }) %>
+</ul>
