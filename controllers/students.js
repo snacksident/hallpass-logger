@@ -48,10 +48,15 @@ router.get('/new', (req,res)=>{
 })
 
 //GET /students/:id
-router.get('/:id', (req,res)=>{
+router.get('/:id', async (req,res)=>{
     //grab id from url
+    const thisStudent = await db.student.findOne({
+        where: {
+            id: req.params.id
+        }
+    })
     //display info for the specific student who the ID matches with
-    res.render('students/show.ejs')
+    res.render('students/show.ejs',{thisStudent})
 })
 //PATCH /students/:id
 //?????
