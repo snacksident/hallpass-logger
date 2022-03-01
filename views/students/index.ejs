@@ -6,14 +6,6 @@
          <a href="/students/<%- student.id %>">
              <%- student.last_name %>, <%- student.first_name %> 
          </a>
-         <label for="classroomSelector">add student to classroom</label>
-         <select id="classroomSelector" name="classroomSelector">
-             <% classroomList.forEach(classroom => { %>
-              <option value="<%- classroom.class_name %> ">
-                <%- classroom.class_name %>
-              </option>
-             <% }) %>
-         </select>
     </li>
     <% }) %>
 </ul>

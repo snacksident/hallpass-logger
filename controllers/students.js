@@ -50,13 +50,18 @@ router.get('/new', (req,res)=>{
 //GET /students/:id
 router.get('/:id', async (req,res)=>{
     //grab id from url
-    const thisStudent = await db.student.findOne({
+    const currentStudent = await db.student.findOne({
         where: {
             id: req.params.id
         }
     })
+    const classroomList = await db.classroom.findAll({
+        where: {
+            userId: res.locals.user.id
+        }
+    })
     //display info for the specific student who the ID matches with
-    res.render('students/show.ejs',{thisStudent})
+    res.render('students/show.ejs',{currentStudent,classroomList})
 })
 //PATCH /students/:id
 //?????

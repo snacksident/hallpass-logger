@@ -48,13 +48,7 @@ router.get('/new',(req,res)=>{
 
 // GET /classrooms/:id
 router.get('/:id',async (req,res)=>{
-    let studentsInClass = await db.classroom.findAll({
-        where: {
-            userId: res.locals.user.id,
-        },
-        include: [db.student]
-    })
-    res.render('classrooms/show.ejs',{studentsInClass})
+    res.render('classrooms/show.ejs')
 })
 
 
