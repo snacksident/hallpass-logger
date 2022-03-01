@@ -37,9 +37,6 @@ router.post('/',async (req,res)=>{
     }else{
         res.redirect('students')
     }
-    //send to db
-    //redirect to students index
-    
 })
 //GET /students/new
 router.get('/new', (req,res)=>{
@@ -49,7 +46,6 @@ router.get('/new', (req,res)=>{
 
 //GET /students/:id
 router.get('/:id', async (req,res)=>{
-    //grab id from url
     const currentStudent = await db.student.findOne({
         where: {
             id: req.params.id
@@ -60,12 +56,30 @@ router.get('/:id', async (req,res)=>{
             userId: res.locals.user.id
         }
     })
-    //display info for the specific student who the ID matches with
     res.render('students/show.ejs',{currentStudent,classroomList})
 })
-//PATCH /students/:id
-//?????
 
+//POST /students/:id
+//?????
+router.post('/addstudent', async(req,res)=>{
+    //grab the classroom selected by the dropdown menu
+    const selectedClassroom = await db.classroom.findOne({
+        where: {
+            id: req.body.classroomSelector
+        }
+    })
+    console.log(selectedClassroom)
+    //grab the student to add to a new classroom
+    const currentStudent = await db.student.findOne({
+        //where students id lines up with the page we're viewing (grab current student)
+        where: {
+            id: req.body.currentStudent
+        }
+    })
+    //add currentStudent to selected classroom
+    selectedClassroom.addStudent(currentStudent)
+    res.redirect('/students')
+})
 
 //DELETE /students/:id
 //??????
