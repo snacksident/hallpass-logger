@@ -13,13 +13,13 @@ app.use(express.urlencoded({extended: false})) //body parser to make req.body wo
 router.get('/', async (req,res)=>{
     //load up classrooms index
     const classList = await db.classroom.findAll()
+    console.log(classList)
     //populate with all created classrooms for this user
     res.render('classrooms/index.ejs',{classList})
 })
 
 //POST /classrooms
 router.post('/', async (req,res)=>{
-    //grab form data
     const [newClassroom, created] = await db.classroom.findOrCreate({
         where: {class_name: req.body.classroom_name}
     })
@@ -28,10 +28,6 @@ router.post('/', async (req,res)=>{
     }else{
         res.redirect('/classrooms')
     }
-   
-    // send to db
-    // redirect to classrooms index
-    // res.redirect('classrooms/index.ejs')
 })
 
 // GET /classrooms/new

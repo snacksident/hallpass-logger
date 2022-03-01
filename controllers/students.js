@@ -27,9 +27,14 @@ router.post('/',async (req,res)=>{
             last_name: req.body.last_name
         }
     })
+    if(!created){
+        console.log('student already exists')
+    }else{
+        res.redirect('students')
+    }
     //send to db
     //redirect to students index
-    res.redirect('students')
+    
 })
 //GET /students/new
 router.get('/new', (req,res)=>{
