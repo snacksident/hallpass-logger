@@ -10,10 +10,11 @@ require('dotenv').config()
 app.use(express.urlencoded({extended: false})) //body parser to make req.body work
 
 // GET /classrooms
-router.get('/',(req,res)=>{
+router.get('/', async (req,res)=>{
     //load up classrooms index
+    const classList = await db.classroom.findAll()
     //populate with all created classrooms for this user
-    res.render('classrooms/index.ejs')
+    res.render('classrooms/index.ejs',{classList})
 })
 
 //POST /classrooms

@@ -1,1 +1,7 @@
-<h1>students index </h1>
+<h1>students index</h1>
+<a href="/students/new">add new student here</a>
+<ul>
+    <% studentList.forEach(student => { %>
+     <li><%- student.last_name %>, <%- student.first_name %> </li>
+    <% }) %>
+</ul>

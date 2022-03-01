@@ -29,7 +29,7 @@ router.post('/',async (req,res)=>{
     })
     //send to db
     //redirect to students index
-    res.redirect('students/index')
+    res.redirect('students')
 })
 //GET /students/new
 router.get('/new', (req,res)=>{
