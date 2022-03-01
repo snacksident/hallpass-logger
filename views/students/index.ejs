@@ -2,6 +2,16 @@
 <a href="/students/new">add new student here</a>
 <ul>
     <% studentList.forEach(student => { %>
-     <li><%- student.last_name %>, <%- student.first_name %> </li>
+     <li>
+         <%- student.last_name %>, <%- student.first_name %> 
+         <label for="classroomSelector">add student to classroom</label>
+         <select id="classroomSelector" name="classroomSelector">
+             <% classroomList.forEach(classroom => { %>
+              <option value="<%- classroom.class_name %> ">
+                <%- classroom.class_name %>
+              </option>
+             <% }) %>
+         </select>
+    </li>
     <% }) %>
 </ul>

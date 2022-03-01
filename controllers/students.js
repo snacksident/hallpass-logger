@@ -13,8 +13,13 @@ router.get('/', async (req,res)=>{
     //load up index page
     //display all students this teacher has access to
     const studentList = await db.student.findAll()
-    // console.log(studentList)
-    res.render('students/index.ejs',{studentList})
+    //grab all classrooms for this teacher
+    const classroomList = await db.classroom.findAll({
+        where: {
+            userId: res.locals.user.id
+        }
+    })
+    res.render('students/index.ejs',{studentList, classroomList})
 })
 
 //POST /students - create new student - reroute to /students

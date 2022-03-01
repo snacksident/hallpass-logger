@@ -26,20 +26,13 @@ router.get('/', async (req,res)=>{
 
 //POST /classrooms
 router.post('/', async (req,res)=>{
-    //need to set userId on classroom table when created.  userId currently is set to null when each classroom is created
-    // const currentUser = await db.user.findOne({
-    //     where: {id: res.locals.user.id}
-    // })
-    
     const [newClassroom, created] = await db.classroom.findOrCreate({
         where: {
             class_name: req.body.classroom_name,
+            //associate newly created classroom with current user
             userId: res.locals.user.id
         }
     })
-    // newClassroom.userId = res.locals.user.id
-    console.log(`user is ${res.locals.user.id}`)
-    console.log(`newClassroom userId is set to: ${newClassroom.userId}`)
     if(!created){
         console.log('classroom already exists')
     }else{
@@ -56,10 +49,12 @@ router.get('/new',(req,res)=>{
 // GET /classrooms/:id
 router.get('/:id',async (req,res)=>{
     let studentsInClass = await db.classroom.findAll({
-        // where: {id: req.params.id},
-        // include: [db.students]
+        where: {
+            userId: res.locals.user.id,
+        },
+        include: [db.student]
     })
-    res.render('classrooms/show.ejs')
+    res.render('classrooms/show.ejs',{studentsInClass})
 })
 
 
