@@ -1,9 +1,13 @@
 const express = require('express')
+const app = new express()
 const router = express.Router()
 const db = require('../models')
 const bcrypt = require('bcrypt')
 const cryptojs = require('crypto-js')
 require('dotenv').config()
+
+//middleware
+app.use(express.urlencoded({extended: false})) //body parser to make req.body work
 
 // GET /classrooms
 router.get('/',(req,res)=>{
@@ -13,11 +17,20 @@ router.get('/',(req,res)=>{
 })
 
 //POST /classrooms
-router.post('/',(req,res)=>{
+router.post('/', async (req,res)=>{
     //grab form data
-    //send to db
-    //redirect to classrooms index
-    res.redirect('classrooms/index.ejs')
+    const [newClassroom, created] = await db.classroom.findOrCreate({
+        where: {class_name: req.body.classroom_name}
+    })
+    if(!created){
+        console.log('classroom already exists')
+    }else{
+        res.redirect('/classrooms')
+    }
+   
+    // send to db
+    // redirect to classrooms index
+    // res.redirect('classrooms/index.ejs')
 })
 
 // GET /classrooms/new

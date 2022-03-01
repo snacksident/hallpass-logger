@@ -12,9 +12,9 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       //1:m with students
-      models.hallpass.hasMany(models.student)
+      // models.hallpass.hasMany(models.student)
       //1:m with clasrooms
-      models.hallpass.hasMany(models.classroom)
+      // models.hallpass.hasMany(models.classroom)
     }
   }
   hallpass.init({
