@@ -1,6 +1,7 @@
 //IMPORTS
 const express = require('express')
 const app = new express()
+const methodOverride = require('method-override')
 const ejsLayouts = require('express-ejs-layouts')
 require('dotenv').config()
 const cookieParser = require('cookie-parser')
@@ -12,6 +13,7 @@ app.set('view engine', 'ejs') //set view engine to ejs
 app.use(ejsLayouts) //tell express we want to use layouts
 app.use(cookieParser()) // gives access to req.cookies
 app.use(express.urlencoded({extended: false})) //body parser to make req.body work
+app.use(methodOverride('_method'))
 
 //CUSTOM LOGIN MIDDLEWARE
 app.use(async (req, res, next)=>{

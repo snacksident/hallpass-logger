@@ -1,5 +1,7 @@
 const express = require('express')
 const app = new express()
+//NEW method override import
+
 const router = express.Router()
 const db = require('../models')
 const bcrypt = require('bcrypt')
@@ -9,6 +11,8 @@ require('dotenv').config()
 
 //middleware
 app.use(express.urlencoded({extended: false})) //body parser to make req.body work
+//NEW method override app.use
+
 
 // GET /classrooms
 router.get('/', async (req,res)=>{
@@ -42,14 +46,31 @@ router.get('/new',(req,res)=>{
 
 // GET /classrooms/:id
 router.get('/:id',async (req,res)=>{
-    const usersClassroom = await db.classroom.findOne({
+    const currentClassroom = await db.classroom.findOne({
         where:{
             id: req.params.id
         }
     })
-    const studentsInClass = await usersClassroom.getStudents()
-    res.render('classrooms/show.ejs',{usersClassroom, studentsInClass})
+    const studentsInClass = await currentClassroom.getStudents()
+    res.render('classrooms/show.ejs',{currentClassroom, studentsInClass})
 })
 
+//DELETE /classrooms/remove-student
+router.delete('/remove-student', async (req,res)=>{
+
+    const targetClassroom = await db.classroom.findOne({
+        where:{
+            id: req.body.thisClassroom
+        }
+    })
+    const targetStudent = await db.student.findOne({
+        where:{
+            id: parseInt(req.body.currentStudent)
+        }
+    })
+    console.log(`trying to remove student with id of ${req.body.currentStudent} from classroom with id of ${req.body.thisClassroom}`)
+    await targetClassroom.removeStudent(targetStudent)
+    res.redirect('/classrooms')
+})
 
 module.exports = router

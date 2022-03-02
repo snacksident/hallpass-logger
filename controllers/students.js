@@ -10,14 +10,15 @@ app.use(express.urlencoded({extended: false}))
 
 //GET /students
 router.get('/', async (req,res)=>{
-    //load up index page
-    //display all students this teacher has access to
+    //TODO display all students that current user has access to
     const studentList = await db.student.findAll({})
     const classroomList = await db.classroom.findAll({
         where: {
             userId: res.locals.user.id
         }
     })
+    //get all students that are associated with classroomList
+    console.log(classroomList)
     res.render('students/index.ejs',{studentList})
 })
 

@@ -3,13 +3,26 @@
 
 
  <h3>
-     <%- usersClassroom.class_name %> 
+     <%- currentClassroom.class_name %> 
  </h3>
  <h4>list of students that have been added to this classroom:</h4>
 <ul>
     <% studentsInClass.forEach(student => { %>
      <li>
-         <%- student.last_name %>, <%- student.first_name %> <button>start hall pass</button>
+         <%- student.last_name %>, <%- student.first_name %> 
+
+         <!-- possible method override to remove student -->
+         <form action="/classrooms/remove-student?_method=DELETE" method="POST">
+             <label for="remove-student"></label>
+
+             <input type="hidden" value="<%= student.id %>" name="currentStudent">
+             
+             <input type="hidden" value="<%= currentClassroom.id %>" name="thisClassroom">
+             
+            
+             <button type="submit" name="currentStudent">remove student from class</button>
+         </form>
+
      </li>
     <% }) %>
 </ul>
