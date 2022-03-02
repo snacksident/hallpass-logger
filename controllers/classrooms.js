@@ -68,7 +68,6 @@ router.delete('/remove-student', async (req,res)=>{
             id: parseInt(req.body.currentStudent)
         }
     })
-    console.log(`trying to remove student with id of ${req.body.currentStudent} from classroom with id of ${req.body.thisClassroom}`)
     await targetClassroom.removeStudent(targetStudent)
     res.redirect('/classrooms')
 })
