@@ -12,15 +12,11 @@ app.use(express.urlencoded({extended: false})) //body parser to make req.body wo
 
 // GET /classrooms
 router.get('/', async (req,res)=>{
-    //load up classrooms index
-    //TODO  currently pulls all classes.  need to join tables and get only classes by current user.
     const classList = await db.classroom.findAll({
         where: {
             userId: res.locals.user.id
         }
     })
-    
-    //populate with all created classrooms for this user
     res.render('classrooms/index.ejs',{classList})
 })
 
@@ -29,14 +25,12 @@ router.post('/', async (req,res)=>{
     const [newClassroom, created] = await db.classroom.findOrCreate({
         where: {
             class_name: req.body.classroom_name,
-            //associate newly created classroom with current user
             userId: res.locals.user.id
         }
     })
     if(!created){
         console.log('classroom already exists')
     }else{
-        
         res.redirect('/classrooms')
     }
 })
@@ -54,7 +48,6 @@ router.get('/:id',async (req,res)=>{
         }
     })
     const studentsInClass = await usersClassroom.getStudents()
-    console.log(studentsInClass)
     res.render('classrooms/show.ejs',{usersClassroom, studentsInClass})
 })
 

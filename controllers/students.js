@@ -12,14 +12,13 @@ app.use(express.urlencoded({extended: false}))
 router.get('/', async (req,res)=>{
     //load up index page
     //display all students this teacher has access to
-    const studentList = await db.student.findAll()
-    //grab all classrooms for this teacher
+    const studentList = await db.student.findAll({})
     const classroomList = await db.classroom.findAll({
         where: {
             userId: res.locals.user.id
         }
     })
-    res.render('students/index.ejs',{studentList, classroomList})
+    res.render('students/index.ejs',{studentList})
 })
 
 //POST /students - create new student - reroute to /students
@@ -59,24 +58,19 @@ router.get('/:id', async (req,res)=>{
     res.render('students/show.ejs',{currentStudent,classroomList})
 })
 
-//POST /students/:id
-//?????
+//POST /students/addstudent - adds student to classroom
 router.post('/addstudent', async(req,res)=>{
-    //grab the classroom selected by the dropdown menu
     const selectedClassroom = await db.classroom.findOne({
         where: {
             id: req.body.classroomSelector
         }
     })
     console.log(selectedClassroom)
-    //grab the student to add to a new classroom
     const currentStudent = await db.student.findOne({
-        //where students id lines up with the page we're viewing (grab current student)
         where: {
             id: req.body.currentStudent
         }
     })
-    //add currentStudent to selected classroom
     selectedClassroom.addStudent(currentStudent)
     res.redirect('/students')
 })
