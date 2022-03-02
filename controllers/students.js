@@ -4,7 +4,7 @@ const router = express.Router()
 const db = require('../models')
 const bcrypt = require('bcrypt')
 const cryptojs = require('crypto-js')
-require('dotenv').config()
+const { user } = require('pg/lib/defaults')
 
 app.use(express.urlencoded({extended: false}))
 
@@ -18,14 +18,12 @@ router.get('/', async (req,res)=>{
         }
     })
     //get all students that are associated with classroomList
-    console.log(classroomList)
     res.render('students/index.ejs',{studentList})
 })
 
 //POST /students - create new student - reroute to /students
 router.post('/',async (req,res)=>{
     //grab form data
-    console.log(req.body.first_name)
     const [newStudent, created] = await db.student.findOrCreate({
         where: {
             first_name: req.body.first_name,
@@ -60,7 +58,7 @@ router.get('/:id', async (req,res)=>{
 })
 
 //POST /students/addstudent - adds student to classroom
-router.post('/addstudent', async(req,res)=>{
+router.post('/addstudent', async (req,res)=>{
     const selectedClassroom = await db.classroom.findOne({
         where: {
             id: req.body.classroomSelector
@@ -78,7 +76,13 @@ router.post('/addstudent', async(req,res)=>{
 
 //DELETE /students/:id
 //??????
-router.delete('/:id', (req,res)=>{
+router.delete('/remove-student', async (req,res)=>{
+    const targetStudent = await db.student.findOne({
+        where:{
+            id: parseInt(req.body.currentStudent)
+        }
+    })
+    // remove reference to student - stop from displaying on all pages
     res.redirect('students/index.ejs')
 })
 

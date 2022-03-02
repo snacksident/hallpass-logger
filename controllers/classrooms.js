@@ -1,6 +1,5 @@
 const express = require('express')
 const app = new express()
-//NEW method override import
 
 const router = express.Router()
 const db = require('../models')
@@ -11,7 +10,7 @@ require('dotenv').config()
 
 //middleware
 app.use(express.urlencoded({extended: false})) //body parser to make req.body work
-//NEW method override app.use
+
 
 
 // GET /classrooms
