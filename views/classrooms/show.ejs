@@ -1,4 +1,4 @@
-<h1>hit the show classrooms route</h1>
+<h1>My Classrooms</h1>
 <h2>viewing info about  </h2>
 
 
@@ -25,11 +25,21 @@
          </form>
          <!-- need another form with button to start/stop hallpass logging -->
          <% // if student is not currently on hallpass, allow timer start %>
-         <form action="/classrooms/hallpass-checkout" method="POST" id="hallpass-checkout">
-            <input type="hidden" value="<%= student.id %>" name="currentStudent">
-             <button type="submit" form="hallpass-checkout">hallpass</button>
-
-         </form>
+         
+         <% if (!student.hasPass) { %>
+            <form action="/classrooms/hallpass-checkout" method="POST" id="hallpass-checkout">
+                <input type="hidden" value="<%= student.id %>" name="currentStudent">
+                 <button type="submit" form="hallpass-checkout">hallpass checkout</button>
+    
+             </form>
+         <% } else {%>
+            <form action="/classrooms/hallpass-checkout" method="POST" id="hallpass-checkin">
+                <input type="hidden" value="<%= student.id %>" name="currentStudent">
+                 <button type="submit" form="hallpass-checkin">hallpass checkin</button>
+    
+             </form>
+        <% } %>
+         
      </li>
     <% }) %>
 </ul>

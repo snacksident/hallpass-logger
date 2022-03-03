@@ -15,8 +15,6 @@ module.exports = (sequelize, DataTypes) => {
       models.classroom.belongsToMany(models.student, {through: 'classrooms_students'})
       //1:M ASSOCIATION WITH USER
       models.classroom.belongsTo(models.user)
-      //M:1 ASSOCIATION WITH HALLPASS
-      models.classroom.hasMany(models.hallpass)
     }
   }
   classroom.init({

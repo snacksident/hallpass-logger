@@ -13,11 +13,17 @@ app.use(express.urlencoded({extended: false})) //body parser to make req.body wo
 
 // GET /classrooms
 router.get('/', async (req,res)=>{
-    const classList = await db.classroom.findAll({
+    // const classList = await db.classroom.findAll({
+    //     where: {
+    //         userId: res.locals.user.id
+    //     }
+    // })
+    const currentUser = await db.user.findOne({
         where: {
-            userId: res.locals.user.id
+            id: res.locals.user.id
         }
     })
+    const classList = currentUser.getClasses()
     res.render('classrooms/index.ejs',{classList})
 })
 
@@ -75,6 +81,7 @@ router.delete('/remove-student', async (req,res)=>{
     res.redirect('/classrooms')
 })
 
+// POST /classrooms/hallpass-checkout
 router.post('/hallpass-checkout', async (req,res)=>{
     //grab current student
     const hallpassStudent = await db.student.findOne({
@@ -87,10 +94,31 @@ router.post('/hallpass-checkout', async (req,res)=>{
         //set hallpass time to now when created
         start_time: new Date()
     })
-    console.log(`hallpass: ${newHallpass} hallpassStudent: ${hallpassStudent}`)
     //connect new student to hallpass
     await hallpassStudent.addHallpass(newHallpass)
     //go to show.ejs page, reflecting that a student is out on hallpass
+    /**
+     * TODO - change to either render or redirect - maybe stay on same page?
+     */
+    res.send('yooooooo')
+})
+
+// PUT /classrooms/hallpass-checkin
+router.put('/hallpass-checkin',async (req,res)=>{
+    //grab current student
+    const hallpassStudent = await db.student.findOne({
+        where:{
+            id: req.body.currentStudent
+        }
+    })
+    //grab this users current hallpass
+    const studentsHallpass = await hallpassStudent.getHallpass()
+    //set checkout time with new date in db
+    studentsHallpass.
+    //go to show.ejs page, reflecting that a student is out on hallpass
+    /**
+     * TODO - change to either render or redirect - maybe stay on same page?
+     */
     res.send('yooooooo')
 })
 

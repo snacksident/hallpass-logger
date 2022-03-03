@@ -10,14 +10,23 @@ app.use(express.urlencoded({extended: false}))
 
 //GET /students
 router.get('/', async (req,res)=>{
-    //TODO display all students that current user has access to
-    const studentList = await db.student.findAll({})
-    const classroomList = await db.classroom.findAll({
-        where: {
-            userId: res.locals.user.id
+    //get current user
+    const currentUser = await db.user.findOne({
+        where:{
+            id: res.locals.user.id
         }
     })
-    //get all students that are associated with classroomList
+    //TODO display all students that current user has access to
+    //get students users has access to (via classrooms user has access to)
+    //get classrooms user has access to
+    const usersClassrooms = currentUser.getClassrooms()
+    console.log(usersClassrooms)
+    //get students within the classrooms
+    // const studentList = usersClassrooms.getStudents()
+
+
+    const studentList = await db.student.findAll({})
+    
     res.render('students/index.ejs',{studentList})
 })
 
@@ -27,7 +36,8 @@ router.post('/',async (req,res)=>{
     const [newStudent, created] = await db.student.findOrCreate({
         where: {
             first_name: req.body.first_name,
-            last_name: req.body.last_name
+            last_name: req.body.last_name,
+            has_pass: false
         }
     })
     if(!created){

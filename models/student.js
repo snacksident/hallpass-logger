@@ -23,7 +23,8 @@ module.exports = (sequelize, DataTypes) => {
   student.init({
     classId: DataTypes.INTEGER,
     first_name: DataTypes.STRING,
-    last_name: DataTypes.STRING
+    last_name: DataTypes.STRING,
+    has_pass: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'student',
