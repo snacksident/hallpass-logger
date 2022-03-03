@@ -26,10 +26,10 @@
                  <button type="submit">hallpass checkout</button>
              </form>
          <% } else {%>
-            <form action="/classrooms/hallpass-checkin?_method=PUT" method="PUT" id="hallpass-checkin">
+            <form action="/classrooms/hallpass-checkin?_method=PUT" method="POST" >
                 <input type="hidden" value="<%= student.id %>" name="currentStudent">
                 <input type="hidden" value="<%= currentClassroom.id %>" name="thisClassroom">
-                 <button type="submit" >hallpass checkin</button>
+                <button type="submit">hallpass checkin</button>
     
              </form>
         <% } %>

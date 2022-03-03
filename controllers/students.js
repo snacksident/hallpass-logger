@@ -60,7 +60,6 @@ router.get('/:id', async (req,res)=>{
         }
     })
     const studentsHallpasses = await currentStudent.getHallpasses()
-    console.log(studentsHallpasses)
     res.render('students/show.ejs',{currentStudent,classroomList,studentsHallpasses})
 })
 

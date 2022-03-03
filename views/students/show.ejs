@@ -27,6 +27,7 @@
 <ul>
     <% studentsHallpasses.forEach(hallpass => { %>
         <li>
+            <!-- TODO need to convert js time object to local time to show dates hallpass happened -->
             total time on this hallpass:<%- hallpass.start_time.getDay() %>/<%-hallpass.start_time.getMonth() %> <%- hallpass.end_time.getMinutes() - hallpass.start_time.getMinutes() %> minutes
         </li>
     <% }) %>

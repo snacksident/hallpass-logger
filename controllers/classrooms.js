@@ -18,11 +18,6 @@ router.get('/', async (req,res)=>{
             userId: res.locals.user.id
         }
     })
-    const currentUser = await db.user.findOne({
-        where: {
-            id: res.locals.user.id
-        }
-    })
     res.render('classrooms/index.ejs',{classList})
 })
 
@@ -54,13 +49,13 @@ router.get('/new',(req,res)=>{
 
 // GET /classrooms/:id
 router.get('/:id',async (req,res)=>{
+    console.log(`trying to get to classrooms/${req.params.id}`)
     const currentClassroom = await db.classroom.findOne({
         where:{
             id: req.params.id
         }
     })
     const studentsInClass = await currentClassroom.getStudents()
-    // console.log(studentsInClass)
     res.render('classrooms/show.ejs',{currentClassroom, studentsInClass})
 })
 
@@ -98,12 +93,12 @@ router.post('/hallpass-checkout', async (req,res)=>{
     /**
      * TODO - change to either render or redirect - maybe stay on same page?
      */
-    console.log(`checking OUT ${hallpassStudent.first_name} @ ${newHallpass.start_time}`)
     res.redirect(`/classrooms/${parseInt(req.body.thisClassroom)}`)
 })
 
-// POST /classrooms/hallpass-checkin
+// PUT /classrooms/hallpass-checkin
 router.put('/hallpass-checkin',async (req,res)=>{
+    console.log('hit the checkin route at least')
     //grab current student
     const hallpassStudent = await db.student.findOne({
         where:{
