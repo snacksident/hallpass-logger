@@ -31,9 +31,15 @@ router.post('/', async (req,res)=>{
             userId: res.locals.user.id
         }
     })
+    const currentUser = await db.user.findOne({
+        where: {
+            id: res.locals.user.id
+        }
+    })
     if(!created){
         console.log('classroom already exists')
     }else{
+        currentUser.addClassroom(newClassroom)
         res.redirect('/classrooms')
     }
 })

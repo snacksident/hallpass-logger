@@ -83,6 +83,7 @@ router.delete('/remove-student', async (req,res)=>{
         }
     })
     // remove reference to student - stop from displaying on all pages
+    console.log(await targetStudent)
     res.redirect('students/index.ejs')
 })
 
