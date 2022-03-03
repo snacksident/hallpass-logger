@@ -3,7 +3,6 @@
 <h2><%= currentStudent.first_name %> <%= currentStudent.last_name %> </h2>
 <h3>student created at <%= currentStudent.createdAt %></h3>
 
-<h3>student appears in "x" classes</h3>
 
 <h4>add student to a new class:</h4>
 <form action="/students/addstudent" method="POST">
@@ -28,7 +27,11 @@
     <% studentsHallpasses.forEach(hallpass => { %>
         <li>
             <!-- TODO need to convert js time object to local time to show dates hallpass happened -->
-            total time on this hallpass:<%- hallpass.start_time.getDay() %>/<%-hallpass.start_time.getMonth() %> <%- hallpass.end_time.getMinutes() - hallpass.start_time.getMinutes() %> minutes
+            <%- hallpass.start_time.getMonth()+1 %> / <%- hallpass.start_time.getDate() %> / <%- hallpass.start_time.getFullYear() %> <%- hallpass.end_time.getMinutes() - hallpass.start_time.getMinutes() %> minutes<br>
+
+            <%- hallpass.end_time - hallpass.start_time  %> end time minus start time<br>
+            <%- (hallpass.end_time - hallpass.start_time) / 1000 %> (end time minus start time) / 1000<br>
+            
         </li>
     <% }) %>
 </ul>

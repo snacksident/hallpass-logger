@@ -59,8 +59,9 @@ router.get('/:id', async (req,res)=>{
             userId: res.locals.user.id
         }
     })
+    const studentsClasses = await currentStudent.getClassrooms()
     const studentsHallpasses = await currentStudent.getHallpasses()
-    res.render('students/show.ejs',{currentStudent,classroomList,studentsHallpasses})
+    res.render('students/show.ejs',{currentStudent,classroomList,studentsHallpasses,studentsClasses})
 })
 
 //POST /students/addstudent - adds student to classroom

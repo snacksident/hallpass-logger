@@ -98,7 +98,6 @@ router.post('/hallpass-checkout', async (req,res)=>{
 
 // PUT /classrooms/hallpass-checkin
 router.put('/hallpass-checkin',async (req,res)=>{
-    console.log('hit the checkin route at least')
     //grab current student
     const hallpassStudent = await db.student.findOne({
         where:{
