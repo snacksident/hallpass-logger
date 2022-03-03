@@ -16,15 +16,10 @@ router.get('/', async (req,res)=>{
             id: res.locals.user.id
         }
     })
-    //TODO display all students that current user has access to
-    //get students users has access to (via classrooms user has access to)
     //get classrooms user has access to
     const usersClassrooms = currentUser.getClassrooms()
     console.log(usersClassrooms)
     //get students within the classrooms
-    // const studentList = usersClassrooms.getStudents()
-
-
     const studentList = await db.student.findAll({})
     
     res.render('students/index.ejs',{studentList})
@@ -66,7 +61,7 @@ router.get('/:id', async (req,res)=>{
     })
     const studentsHallpasses = await currentStudent.getHallpasses()
     console.log(studentsHallpasses)
-    res.render('students/show.ejs',{currentStudent,classroomList})
+    res.render('students/show.ejs',{currentStudent,classroomList,studentsHallpasses})
 })
 
 //POST /students/addstudent - adds student to classroom
