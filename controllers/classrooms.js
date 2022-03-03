@@ -60,6 +60,7 @@ router.get('/:id',async (req,res)=>{
         }
     })
     const studentsInClass = await currentClassroom.getStudents()
+    // console.log(studentsInClass)
     res.render('classrooms/show.ejs',{currentClassroom, studentsInClass})
 })
 
@@ -77,17 +78,15 @@ router.delete('/remove-student', async (req,res)=>{
         }
     })
     await targetClassroom.removeStudent(targetStudent)
-    res.redirect('/classrooms')
+    res.redirect(`/classrooms`)
 })
 
 // POST /classrooms/hallpass-checkout
 router.post('/hallpass-checkout', async (req,res)=>{
     //grab current student
-    const hallpassStudent = await db.student.findOne({
-        where:{
-            id: req.body.currentStudent
-        }
-    })
+    const hallpassStudent = await db.student.findByPk(req.body.currentStudent)
+    console.log(hallpassStudent)
+    console.log(req.body.currentStudent)
     //create new hallpass
     const newHallpass = await db.hallpass.create({
         //set hallpass time to now when created
@@ -106,7 +105,7 @@ router.post('/hallpass-checkout', async (req,res)=>{
 })
 
 // POST /classrooms/hallpass-checkin
-router.post('/hallpass-checkin',async (req,res)=>{
+router.put('/hallpass-checkin',async (req,res)=>{
     //grab current student
     const hallpassStudent = await db.student.findOne({
         where:{
@@ -127,7 +126,7 @@ router.post('/hallpass-checkin',async (req,res)=>{
     })
     //check hallpass back in - set students has_pass back to false
     await hallpassStudent.update({has_pass: false})
-    console.log(`checking IN ${hallpassStudent.first_name} @ ${studentsHallpass.end_time}`)
+    //calculate how many minutes student spent with hallpass
     console.log(`time spent with pass: ${studentsHallpass.end_time.getMinutes() - studentsHallpass.start_time.getMinutes()}`)
     //reload current page
     res.redirect(`/classrooms/${parseInt(req.body.thisClassroom)}`)
