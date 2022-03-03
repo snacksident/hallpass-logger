@@ -1,12 +1,10 @@
 const express = require('express')
 const app = new express()
-
 const router = express.Router()
 const db = require('../models')
 const bcrypt = require('bcrypt')
 const cryptojs = require('crypto-js')
 const { user } = require('pg/lib/defaults')
-require('dotenv').config()
 
 //middleware
 app.use(express.urlencoded({extended: false})) //body parser to make req.body work
@@ -75,6 +73,25 @@ router.delete('/remove-student', async (req,res)=>{
     })
     await targetClassroom.removeStudent(targetStudent)
     res.redirect('/classrooms')
+})
+
+router.post('/hallpass-checkout', async (req,res)=>{
+    //grab current student
+    const hallpassStudent = await db.student.findOne({
+        where:{
+            id: req.body.currentStudent
+        }
+    })
+    //create new hallpass
+    const newHallpass = await db.hallpass.create({
+        //set hallpass time to now when created
+        start_time: new Date()
+    })
+    console.log(`hallpass: ${newHallpass} hallpassStudent: ${hallpassStudent}`)
+    //connect new student to hallpass
+    await hallpassStudent.addHallpass(newHallpass)
+    //go to show.ejs page, reflecting that a student is out on hallpass
+    res.send('yooooooo')
 })
 
 module.exports = router

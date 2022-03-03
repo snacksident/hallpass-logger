@@ -13,7 +13,7 @@
              <%- student.last_name %>, <%- student.first_name %> 
          </a>
 
-         <form action="/classrooms/remove-student?_method=DELETE" method="POST">
+         <form action="/classrooms/remove-student?_method=DELETE" method="POST" id="student-delete">
              <label for="remove-student"></label>
 
              <input type="hidden" value="<%= student.id %>" name="currentStudent">
@@ -21,15 +21,13 @@
              <input type="hidden" value="<%= currentClassroom.id %>" name="thisClassroom">
              
             
-             <button type="submit" name="currentStudent">remove student from class</button>
+             <button type="submit" name="currentStudent" form="student-delete">remove student from class</button>
          </form>
          <!-- need another form with button to start/stop hallpass logging -->
-         <form>
-
-            <% // if student is not currently on hallpass, allow timer start %>
-             
-            <% // else, only allow timer stop and log time %>
-             <button type="submit">hallpass</button>
+         <% // if student is not currently on hallpass, allow timer start %>
+         <form action="/classrooms/hallpass-checkout" method="POST" id="hallpass-checkout">
+            <input type="hidden" value="<%= student.id %>" name="currentStudent">
+             <button type="submit" form="hallpass-checkout">hallpass</button>
 
          </form>
      </li>

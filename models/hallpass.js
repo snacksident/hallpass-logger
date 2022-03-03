@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   hallpass.init({
-    classId: DataTypes.INTEGER,
+    classroomId: DataTypes.INTEGER,
     studentId: DataTypes.INTEGER,
     start_time: DataTypes.DATE,
     end_time: DataTypes.DATE
