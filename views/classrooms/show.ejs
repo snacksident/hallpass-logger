@@ -26,14 +26,13 @@
          <!-- need another form with button to start/stop hallpass logging -->
          <% // if student is not currently on hallpass, allow timer start %>
          
-         <% if (!student.hasPass) { %>
+         <% if (!student.has_pass) { %>
             <form action="/classrooms/hallpass-checkout" method="POST" id="hallpass-checkout">
                 <input type="hidden" value="<%= student.id %>" name="currentStudent">
                  <button type="submit" form="hallpass-checkout">hallpass checkout</button>
-    
              </form>
          <% } else {%>
-            <form action="/classrooms/hallpass-checkout" method="POST" id="hallpass-checkin">
+            <form action="/classrooms/hallpass-checkin" method="POST" id="hallpass-checkin">
                 <input type="hidden" value="<%= student.id %>" name="currentStudent">
                  <button type="submit" form="hallpass-checkin">hallpass checkin</button>
     

@@ -13,17 +13,16 @@ app.use(express.urlencoded({extended: false})) //body parser to make req.body wo
 
 // GET /classrooms
 router.get('/', async (req,res)=>{
-    // const classList = await db.classroom.findAll({
-    //     where: {
-    //         userId: res.locals.user.id
-    //     }
-    // })
+    const classList = await db.classroom.findAll({
+        where: {
+            userId: res.locals.user.id
+        }
+    })
     const currentUser = await db.user.findOne({
         where: {
             id: res.locals.user.id
         }
     })
-    const classList = currentUser.getClasses()
     res.render('classrooms/index.ejs',{classList})
 })
 
@@ -96,6 +95,8 @@ router.post('/hallpass-checkout', async (req,res)=>{
     })
     //connect new student to hallpass
     await hallpassStudent.addHallpass(newHallpass)
+    //change students has_pass status
+    await hallpassStudent.update({has_pass: true})
     //go to show.ejs page, reflecting that a student is out on hallpass
     /**
      * TODO - change to either render or redirect - maybe stay on same page?
@@ -103,8 +104,8 @@ router.post('/hallpass-checkout', async (req,res)=>{
     res.send('yooooooo')
 })
 
-// PUT /classrooms/hallpass-checkin
-router.put('/hallpass-checkin',async (req,res)=>{
+// POST /classrooms/hallpass-checkin
+router.post('/hallpass-checkin',async (req,res)=>{
     //grab current student
     const hallpassStudent = await db.student.findOne({
         where:{
@@ -112,10 +113,19 @@ router.put('/hallpass-checkin',async (req,res)=>{
         }
     })
     //grab this users current hallpass
-    const studentsHallpass = await hallpassStudent.getHallpass()
+    const studentsHallpass = await db.hallpass.findOne({
+        //find the one hallpass associated with the student that has a null end_time
+        where:{
+            studentId: req.body.currentStudent,
+            end_time: null
+        }
+    })
     //set checkout time with new date in db
-    studentsHallpass.
-    //go to show.ejs page, reflecting that a student is out on hallpass
+    await studentsHallpass.update({
+        end_time: new Date()
+    })
+    //check hallpass back in - set students has_pass back to false
+    await hallpassStudent.update({has_pass: false})
     /**
      * TODO - change to either render or redirect - maybe stay on same page?
      */
