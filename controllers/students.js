@@ -64,6 +64,8 @@ router.get('/:id', async (req,res)=>{
             userId: res.locals.user.id
         }
     })
+    const studentsHallpasses = await currentStudent.getHallpasses()
+    console.log(studentsHallpasses)
     res.render('students/show.ejs',{currentStudent,classroomList})
 })
 
@@ -94,7 +96,7 @@ router.delete('/remove-student', async (req,res)=>{
     })
     // remove reference to student - stop from displaying on all pages
     console.log(targetStudent)
-    res.redirect('students/index.ejs')
+    res.redirect('students/')
 })
 
 module.exports = router

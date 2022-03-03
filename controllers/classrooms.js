@@ -101,7 +101,8 @@ router.post('/hallpass-checkout', async (req,res)=>{
     /**
      * TODO - change to either render or redirect - maybe stay on same page?
      */
-    res.send('yooooooo')
+    console.log(`checking OUT ${hallpassStudent.first_name} @ ${newHallpass.start_time}`)
+    res.redirect(`/classrooms/${parseInt(req.body.thisClassroom)}`)
 })
 
 // POST /classrooms/hallpass-checkin
@@ -114,7 +115,7 @@ router.post('/hallpass-checkin',async (req,res)=>{
     })
     //grab this users current hallpass
     const studentsHallpass = await db.hallpass.findOne({
-        //find the one hallpass associated with the student that has a null end_time
+        //find the one hallpass associated with the student that has a null end_time (incomplete hall pass)
         where:{
             studentId: req.body.currentStudent,
             end_time: null
@@ -126,10 +127,10 @@ router.post('/hallpass-checkin',async (req,res)=>{
     })
     //check hallpass back in - set students has_pass back to false
     await hallpassStudent.update({has_pass: false})
-    /**
-     * TODO - change to either render or redirect - maybe stay on same page?
-     */
-    res.send('yooooooo')
+    console.log(`checking IN ${hallpassStudent.first_name} @ ${studentsHallpass.end_time}`)
+    console.log(`time spent with pass: ${studentsHallpass.end_time.getMinutes() - studentsHallpass.start_time.getMinutes()}`)
+    //reload current page
+    res.redirect(`/classrooms/${parseInt(req.body.thisClassroom)}`)
 })
 
 module.exports = router
