@@ -26,12 +26,13 @@
 <ul>
     <% studentsHallpasses.forEach(hallpass => { %>
         <li>
-            <!-- TODO need to convert js time object to local time to show dates hallpass happened -->
-            <%- hallpass.start_time.getMonth()+1 %> / <%- hallpass.start_time.getDate() %> / <%- hallpass.start_time.getFullYear() %> <%- hallpass.end_time.getMinutes() - hallpass.start_time.getMinutes() %> minutes<br>
-
-            <%- hallpass.end_time - hallpass.start_time  %> end time minus start time<br>
-            <%- (hallpass.end_time - hallpass.start_time) / 1000 %> (end time minus start time) / 1000<br>
-            
+            <%- hallpass.start_time.getMonth()+1 %> / <%- hallpass.start_time.getDate() %> / <%- hallpass.start_time.getFullYear() %> <br>
+            <!-- some calculations for seconds/minutes -->
+            <% if (((hallpass.end_time - hallpass.start_time) / 1000)/60 > 1) { %>
+                <%- Math.floor(((hallpass.end_time - hallpass.start_time) / 1000) / 60) %> minutes
+            <% }else{ %>
+                shorter than 1 minute
+            <% } %>
         </li>
     <% }) %>
 </ul>
