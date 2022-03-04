@@ -73,7 +73,7 @@ router.delete('/remove-student', async (req,res)=>{
         }
     })
     await targetClassroom.removeStudent(targetStudent)
-    res.redirect(`/classrooms`)
+    res.redirect(`/classrooms/${req.body.thisClassroom}`)
 })
 
 // POST /classrooms/hallpass-checkout
