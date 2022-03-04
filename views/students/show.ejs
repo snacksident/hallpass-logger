@@ -3,25 +3,6 @@
 <h2><%= currentStudent.first_name %> <%= currentStudent.last_name %> </h2>
 <h3>student created at <%= currentStudent.createdAt %></h3>
 
-
-<h4>add student to a new class:</h4>
-<form action="/students/addstudent" method="POST">
-    <label for="classroomSelector">select new classroom</label>
-    <select name="classroomSelector" id="classroomSelector">
-        <option value="">--please select a classroom--</option>
-        <% if (classroomList.length >= 1) { %>
-            <% classroomList.forEach(classroom => { %>
-            <option value="<%- classroom.id %>">
-                <%- classroom.class_name %> 
-            </option>
-            <% }) %>
-        <% } else { %>
-            <option value="">no available classes!</option>
-        <% } %>
-    </select>
-    <input type="hidden" value="<%- currentStudent.id %>" name="currentStudent">
-    <button type="submit">add student to selected class</button>
-</form>
 <h4>hallpass usage for this student</h4>
 <ul>
     <% studentsHallpasses.forEach(hallpass => { %>

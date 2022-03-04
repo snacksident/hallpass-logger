@@ -1,15 +1,16 @@
 <h1>classrooms index</h1>
 <a href="/classrooms/new">add new classroom here</a>
 <h2>My Classrooms:</h2>
-<ul>
+<div class="container">
     <% classList.forEach(classroom => { %>
-     <li>
+     <div>
          <a href = "/classrooms/<%- classroom.id %> "> <%- classroom.class_name %> </a>
          <!-- form to remove classroom -->
          <form method="POST" action="/classrooms/remove-classroom?_method=DELETE">
              <input type="hidden" value="<%- classroom.id%>" name="thisClassroom">
             <button type="submit">delete classroom</button>
          </form>
-     </li>
+     </div>
+     
     <% }) %>
-</ul>
+</div>
