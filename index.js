@@ -14,6 +14,7 @@ app.use(ejsLayouts) //tell express we want to use layouts
 app.use(cookieParser()) // gives access to req.cookies
 app.use(express.urlencoded({extended: false})) //body parser to make req.body work
 app.use(methodOverride('_method'))
+app.use("/public", express.static("public")) //access to public css/js folders
 
 //CUSTOM LOGIN MIDDLEWARE
 app.use(async (req, res, next)=>{
