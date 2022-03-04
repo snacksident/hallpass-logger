@@ -142,4 +142,20 @@ router.put('/hallpass-checkin',async (req,res)=>{
     res.redirect(`/classrooms/${parseInt(req.body.thisClassroom)}`)
 })
 
+//DELETE /classrooms/remove-classroom
+router.delete('/remove-classroom', async(req,res)=>{
+    const targetClassroom = await db.classroom.findOne({
+        where:{
+            id: req.body.thisClassroom
+        }
+    })
+    const currentUser = await db.user.findOne({
+        where: {
+            id: res.locals.user.id
+        }
+    })
+    currentUser.removeClassroom(targetClassroom)
+    res.redirect('/classrooms')
+})
+
 module.exports = router

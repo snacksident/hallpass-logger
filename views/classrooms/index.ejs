@@ -5,6 +5,11 @@
     <% classList.forEach(classroom => { %>
      <li>
          <a href = "/classrooms/<%- classroom.id %> "> <%- classroom.class_name %> </a>
+         <!-- form to remove classroom -->
+         <form method="POST" action="/classrooms/remove-classroom?_method=DELETE">
+             <input type="hidden" value="<%- classroom.id%>" name="thisClassroom">
+            <button type="submit">delete classroom</button>
+         </form>
      </li>
     <% }) %>
 </ul>
