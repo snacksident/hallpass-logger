@@ -18,7 +18,7 @@
                  <input type="hidden" value="<%= currentClassroom.id %>" name="thisClassroom">
                  
                 
-                 <button type="submit" name="currentStudent">remove student from class</button>
+                 <button type="submit">remove student from class</button>
              </form>
          </div>
          <% // if student is not currently on hallpass, allow timer start %>
@@ -41,4 +41,17 @@
          
     </div>
     <% }) %>
+    <!-- form to add student from classroom page -->
+    <div class="add-student">
+        <form action="/classrooms/create-student" method="POST" id="add-student">
+            <label for="add-student"></label>
+            <input type="hidden" value="<%= currentClassroom.id %>" name="thisClassroom">
+            <input type="text" name="first_name" id="first-name" placeholder="first name">
+            <input type="text" name="last_name" id="last-name" placeholder="last name">
+
+            
+           
+            <button type="submit">add student to class</button>
+        </form>
+    </div>
 </div>

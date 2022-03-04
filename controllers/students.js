@@ -17,7 +17,7 @@ router.get('/', async (req,res)=>{
         }
     })
     //get classrooms user has access to
-    const usersClassrooms = currentUser.getClassrooms()
+    const usersClassrooms = await currentUser.getClassrooms()
     console.log(usersClassrooms)
     //get students within the classrooms
     const studentList = await db.student.findAll({})

@@ -22,7 +22,7 @@ router.get('/', async (req,res)=>{
 })
 
 //POST /classrooms
-router.post('/', async (req,res)=>{
+router.post('/newclassroom', async (req,res)=>{
     const [newClassroom, created] = await db.classroom.findOrCreate({
         where: {
             class_name: req.body.classroom_name,
@@ -35,7 +35,7 @@ router.post('/', async (req,res)=>{
         }
     })
     if(!created){
-        console.log('classroom already exists')
+        console.log('classroom already exists - try new name')
     }else{
         currentUser.addClassroom(newClassroom)
         res.redirect('/classrooms')
@@ -49,7 +49,6 @@ router.get('/new',(req,res)=>{
 
 // GET /classrooms/:id
 router.get('/:id',async (req,res)=>{
-    console.log(`trying to get to classrooms/${req.params.id}`)
     const currentClassroom = await db.classroom.findOne({
         where:{
             id: req.params.id
@@ -73,6 +72,23 @@ router.delete('/remove-student', async (req,res)=>{
         }
     })
     await targetClassroom.removeStudent(targetStudent)
+    res.redirect(`/classrooms/${req.body.thisClassroom}`)
+})
+
+//POST /classrooms/create-student
+router.post('/create-student', async (req,res)=>{
+    const [newStudent, created] = await db.student.findOrCreate({
+        where: {
+            first_name: req.body.first_name,
+            last_name: req.body.last_name
+        }
+    })
+    const currentClassroom = await db.classroom.findOne({
+        where:{
+            id: req.body.thisClassroom
+        }
+    })
+    currentClassroom.addStudent(newStudent)
     res.redirect(`/classrooms/${req.body.thisClassroom}`)
 })
 
