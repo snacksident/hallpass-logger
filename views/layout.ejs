@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/public/css/styles.css">
-    <title>hallpass app</title>
+    <title>hallpass loggr</title>
 </head>
 <body>
     <h1>hallpass</h1>
@@ -14,12 +14,12 @@
             <% if (user) { %>
                 <li><a href="/users/profile">Profile</a></li>
                 <li><a href="/users/logout">Log out</a></li>
+
+                <li><a href="/classrooms">view my classrooms</a></li>
             <% } else { %>
                 <li><a href="/users/new">Sign-Up</a></li>
                 <li><a href="/users/login">Login</a></li>
             <% } %>
-            <li><a href="/classrooms">view my classrooms</a></li>
-            <li><a href="/students">view all students</a></li>
         </ul>
     </nav>
     <%- body  %>

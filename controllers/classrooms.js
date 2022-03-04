@@ -49,13 +49,17 @@ router.get('/new',(req,res)=>{
 
 // GET /classrooms/:id
 router.get('/:id',async (req,res)=>{
-    const currentClassroom = await db.classroom.findOne({
-        where:{
-            id: req.params.id
-        }
-    })
-    const studentsInClass = await currentClassroom.getStudents()
-    res.render('classrooms/show.ejs',{currentClassroom, studentsInClass})
+    try {
+        const currentClassroom = await db.classroom.findOne({
+            where:{
+                id: req.params.id
+            }
+        })
+        const studentsInClass = await currentClassroom.getStudents()
+        res.render('classrooms/show.ejs',{currentClassroom, studentsInClass})
+    } catch (error) {
+        console.log(error)
+    }
 })
 
 //DELETE /classrooms/remove-student
