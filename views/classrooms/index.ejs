@@ -1,5 +1,4 @@
 <h1>classrooms index</h1>
-<a href="/classrooms/new">add new classroom here</a>
 <h2>My Classrooms:</h2>
 <div class="container">
     <% classList.forEach(classroom => { %>
@@ -13,4 +12,9 @@
      </div>
      
     <% }) %>
+    <!-- form to add class inline -->
+    <form action="/classrooms/newclassroom" method="post">
+        <input type="text" name="classroom_name" >
+        <button type="submit">add new classroom</button>
+    </form>
 </div>

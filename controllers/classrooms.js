@@ -22,8 +22,7 @@ router.get('/', async (req,res)=>{
 router.post('/newclassroom', async (req,res)=>{
     const [newClassroom, created] = await db.classroom.findOrCreate({
         where: {
-            class_name: req.body.classroom_name,
-            userId: res.locals.user.id
+            class_name: req.body.classroom_name
         }
     })
     if(!created){
