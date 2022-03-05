@@ -49,19 +49,23 @@ router.get('/new', (req,res)=>{
 
 //GET /students/:id
 router.get('/:id', async (req,res)=>{
-    const currentStudent = await db.student.findOne({
-        where: {
-            id: req.params.id
-        }
-    })
-    const classroomList = await db.classroom.findAll({
-        where: {
-            userId: res.locals.user.id
-        }
-    })
-    const studentsClasses = await currentStudent.getClassrooms()
-    const studentsHallpasses = await currentStudent.getHallpasses()
-    res.render('students/show.ejs',{currentStudent,classroomList,studentsHallpasses,studentsClasses})
+    try {
+        const currentStudent = await db.student.findOne({
+            where: {
+                id: req.params.id
+            }
+        })
+        const classroomList = await db.classroom.findAll({
+            where: {
+                userId: res.locals.user.id
+            }
+        })
+        const studentsClasses = await currentStudent.getClassrooms()
+        const studentsHallpasses = await currentStudent.getHallpasses()
+        res.render('students/show.ejs',{currentStudent,classroomList,studentsHallpasses,studentsClasses})
+    } catch (error) {
+        res.render('error.ejs')
+    }
 })
 
 //POST /students/addstudent - adds student to classroom

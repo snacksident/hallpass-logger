@@ -42,6 +42,11 @@ app.get('/', (req,res)=>{
     res.render('home.ejs')
 })
 
+app.get('/:anything', (req,res)=>{
+    res.render('error.ejs')
+    // res.send(`you've hit ${req.params.anything}`)
+})
+
 
 const PORT = process.env.PORT || 8000
 app.listen(PORT, ()=>{
