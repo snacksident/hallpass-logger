@@ -5,6 +5,7 @@ const db = require('../models')
 const bcrypt = require('bcrypt')
 const cryptojs = require('crypto-js')
 const { user } = require('pg/lib/defaults')
+const axios = require('axios').default
 
 //middleware
 app.use(express.urlencoded({extended: false})) //body parser to make req.body work
@@ -13,11 +14,7 @@ app.use(express.urlencoded({extended: false})) //body parser to make req.body wo
 
 // GET /classrooms
 router.get('/', async (req,res)=>{
-    const classList = await db.classroom.findAll({
-        where: {
-            userId: res.locals.user.id
-        }
-    })
+    classList = await res.locals.user.getClassrooms()
     res.render('classrooms/index.ejs',{classList})
 })
 
@@ -25,19 +22,13 @@ router.get('/', async (req,res)=>{
 router.post('/newclassroom', async (req,res)=>{
     const [newClassroom, created] = await db.classroom.findOrCreate({
         where: {
-            class_name: req.body.classroom_name,
-            userId: res.locals.user.id
-        }
-    })
-    const currentUser = await db.user.findOne({
-        where: {
-            id: res.locals.user.id
+            class_name: req.body.classroom_name
         }
     })
     if(!created){
         console.log('classroom already exists - try new name')
     }else{
-        currentUser.addClassroom(newClassroom)
+        res.locals.user.addClassroom(newClassroom)
         res.redirect('/classrooms')
     }
 })
@@ -49,18 +40,23 @@ router.get('/new',(req,res)=>{
 
 // GET /classrooms/:id
 router.get('/:id',async (req,res)=>{
-    const currentClassroom = await db.classroom.findOne({
-        where:{
-            id: req.params.id
-        }
-    })
-    const studentsInClass = await currentClassroom.getStudents()
-    res.render('classrooms/show.ejs',{currentClassroom, studentsInClass})
+    try {
+        const currentClassroom = await db.classroom.findOne({
+            where:{
+                id: req.params.id
+            }
+        })
+        const studentsInClass = await currentClassroom.getStudents()
+        res.render('classrooms/show.ejs',{currentClassroom, studentsInClass})
+    } catch (error) {
+        console.log(`error @ /classrooms/:id - input ID is ${req.params.id} ${error}`)
+        //render error page
+        res.render('error.ejs')
+    }
 })
 
 //DELETE /classrooms/remove-student
 router.delete('/remove-student', async (req,res)=>{
-
     const targetClassroom = await db.classroom.findOne({
         where:{
             id: req.body.thisClassroom
@@ -134,8 +130,22 @@ router.put('/hallpass-checkin',async (req,res)=>{
     })
     //check hallpass back in - set students has_pass back to false
     await hallpassStudent.update({has_pass: false})
+
+    //need to get student a joke for returning to class
+
     //reload current page
     res.redirect(`/classrooms/${parseInt(req.body.thisClassroom)}`)
+})
+
+//DELETE /classrooms/remove-classroom
+router.delete('/remove-classroom', async(req,res)=>{
+    const targetClassroom = await db.classroom.findOne({
+        where:{
+            id: req.body.thisClassroom
+        }
+    })
+    res.locals.user.removeClassroom(targetClassroom)
+    res.redirect('/classrooms')
 })
 
 module.exports = router

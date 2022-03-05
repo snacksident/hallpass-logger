@@ -3,38 +3,23 @@
 <h2><%= currentStudent.first_name %> <%= currentStudent.last_name %> </h2>
 <h3>student created at <%= currentStudent.createdAt %></h3>
 
-
-<h4>add student to a new class:</h4>
-<form action="/students/addstudent" method="POST">
-    <label for="classroomSelector">select new classroom</label>
-    <select name="classroomSelector" id="classroomSelector">
-        <option value="">--please select a classroom--</option>
-        <% if (classroomList.length >= 1) { %>
-            <% classroomList.forEach(classroom => { %>
-            <option value="<%- classroom.id %>">
-                <%- classroom.class_name %> 
-            </option>
-            <% }) %>
-        <% } else { %>
-            <option value="">no available classes!</option>
-        <% } %>
-    </select>
-    <input type="hidden" value="<%- currentStudent.id %>" name="currentStudent">
-    <button type="submit">add student to selected class</button>
-</form>
 <h4>hallpass usage for this student</h4>
 <ul>
     <% studentsHallpasses.forEach(hallpass => { %>
         <li>
             <%- hallpass.start_time.getMonth()+1 %> / <%- hallpass.start_time.getDate() %> / <%- hallpass.start_time.getFullYear() %> <br>
-            <!-- some calculations for seconds/minutes -->
-            <% if (((hallpass.end_time - hallpass.start_time) / 1000)/60 > 1) { %>
-                <%- Math.floor(((hallpass.end_time - hallpass.start_time) / 1000) / 60) %> minutes
-            <% }else{ %>
-                shorter than 1 minute
-            <% } %>
+            <!-- check if user is currently ON hallpass by checking if end_time is null -->
+            <% if (hallpass.end_time !== null) { %>
+                <!-- do some math to display how long student was on hall pass -->
+                <% if (((hallpass.end_time - hallpass.start_time) / 1000)/60 > 1) { %>
+                    <%- Math.floor(((hallpass.end_time - hallpass.start_time) / 1000) / 60) %> minutes
+                <% }else{ %>
+                    under 1 minute
+                <% } %>
+            <!-- if current hall pass does not have an end_time value -->
+            <% } else { %>
+                hallpass in progress
+            <% } %> 
         </li>
     <% }) %>
 </ul>
-
-
