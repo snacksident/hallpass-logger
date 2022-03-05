@@ -1,13 +1,15 @@
 <h1>you're home</h1>
 
+<!-- page to display if user IS NOT logged in -->
 <% if (!user) { %>
     <div class="container">
-        <h2>welcome back to loggr</h2>
+        <h2>welcome to loggr - the hallpass tracking app!</h2>
         <h3>get started by <a href="/users/new">creating an account</a> or <a href="/users/login">logging in</a></h3>
     </div>
+<!-- page to display if user IS logged in -->
 <% } else { %>
     <div class="container">
-        <h2>welcome to loggr - the break tracking app!</h2>
+        <h2>welcome back!</h2>
         <h3>get started by <a href="/classrooms">creating your first classroom!</a></h3>
     </div>
 

@@ -3,8 +3,8 @@
 <div class="container">
     <% studentList.forEach(student => { %>
      <div>
-         <a href="/students/<%- student.id %>">
-             <%- student.last_name %>, <%- student.first_name %> 
+         <a href="/students/<%-// student.id %>">
+             <%-// student.last_name %>, <%-// student.first_name %> 
          </a>
      </div>
     <% }) %>
