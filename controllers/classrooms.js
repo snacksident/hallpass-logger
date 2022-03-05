@@ -49,13 +49,14 @@ router.get('/:id',async (req,res)=>{
         const studentsInClass = await currentClassroom.getStudents()
         res.render('classrooms/show.ejs',{currentClassroom, studentsInClass})
     } catch (error) {
-        console.log(error)
+        console.log(`error @ /classrooms/:id - input ID is ${req.params.id} ${error}`)
+        //render error page
+        res.render('error.ejs')
     }
 })
 
 //DELETE /classrooms/remove-student
 router.delete('/remove-student', async (req,res)=>{
-
     const targetClassroom = await db.classroom.findOne({
         where:{
             id: req.body.thisClassroom

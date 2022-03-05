@@ -81,8 +81,7 @@ router.post('/addstudent', async (req,res)=>{
     res.redirect('/students')
 })
 
-//DELETE /students/:id
-//??????
+//DELETE /students/remove-student
 router.delete('/remove-student', async (req,res)=>{
     const targetStudent = await db.student.findOne({
         where:{
