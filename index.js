@@ -7,6 +7,7 @@ require('dotenv').config()
 const cookieParser = require('cookie-parser')
 const cryptoJS = require('crypto-js')
 const db = require('./models/index.js')
+const axios = require('axios')
 
 //MIDDLEWARE
 app.set('view engine', 'ejs') //set view engine to ejs
@@ -38,8 +39,17 @@ app.use('/students', require('./controllers/students.js'))
 
 
 //ROUTES
-app.get('/', (req,res)=>{
-    res.render('home.ejs')
+app.get('/', async (req,res)=>{
+    //get quote from api
+    try {
+        const dailyQuote = await axios.get('https://zenquotes.io/?api=today')
+        const quoteContent = dailyQuote.data[0].q
+        const quoteAuthor = dailyQuote.data[0].a
+        console.log(`${quoteContent}  -${quoteAuthor}`)
+        res.render('home.ejs', {dailyQuote})
+    } catch (error) {
+        console.log(`error is ${error}`)
+    }
 })
 
 app.get('/:anything', (req,res)=>{

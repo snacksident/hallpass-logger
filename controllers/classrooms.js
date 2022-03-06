@@ -5,11 +5,10 @@ const db = require('../models')
 const bcrypt = require('bcrypt')
 const cryptojs = require('crypto-js')
 const { user } = require('pg/lib/defaults')
-const axios = require('axios').default
+const axios = require('axios')
 
 //middleware
 app.use(express.urlencoded({extended: false})) //body parser to make req.body work
-
 
 
 // GET /classrooms
@@ -132,6 +131,7 @@ router.put('/hallpass-checkin',async (req,res)=>{
     await hallpassStudent.update({has_pass: false})
 
     //need to get student a joke for returning to class
+    await getJoke()
 
     //reload current page
     res.redirect(`/classrooms/${parseInt(req.body.thisClassroom)}`)
