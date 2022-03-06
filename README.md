@@ -60,4 +60,8 @@
 
 * Neat and clean styling 
 
+* Add notes for each hallpass usage
+
+* Quick display of most recent hallpass logs for each student
+
 * Ability for user to arrange students on `/classes/:id` page

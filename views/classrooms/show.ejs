@@ -5,7 +5,7 @@
     <h2>viewing   <%- currentClassroom.class_name %> </h2>
     
      <h4>roster for <%- currentClassroom.class_name %> :</h4>
-    <div class="container">
+    <div class="student-container">
         
         <% studentsInClass.forEach(student => { %>
 
@@ -42,19 +42,19 @@
             </div>
         
         <% }) %>
-        <!-- form to add student from classroom page -->
-        <div class="add-student">
-            <form action="/classrooms/create-student" method="POST" id="add-student">
-                <label for="add-student"></label>
-                <input type="hidden" value="<%= currentClassroom.id %>" name="thisClassroom">
-                <input type="text" name="first_name" id="first-name" placeholder="first name">
-                <input type="text" name="last_name" id="last-name" placeholder="last name">
-    
-                
-               
-                <button type="submit">add student to class</button>
-            </form>
-        </div>
+        
+        
+    </div>
+    <!-- form to add student from classroom page -->
+    <div class="add-student">
+        <form action="/classrooms/create-student" method="POST" id="add-student">
+            <label for="add-student"></label>
+            <input type="hidden" value="<%= currentClassroom.id %>" name="thisClassroom">
+            <input type="text" name="first_name" id="first-name" placeholder="first name">
+            <input type="text" name="last_name" id="last-name" placeholder="last name">
+
+            <button type="submit">add student to class</button>
+        </form>
     </div>
 <% } else { %>
     <h3>this is not your classroom!!</h3>
