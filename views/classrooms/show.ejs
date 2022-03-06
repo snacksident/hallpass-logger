@@ -8,12 +8,31 @@
     <div class="container">
         
         <% studentsInClass.forEach(student => { %>
+
+            <!-- trying bootstrap cards -->
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">
+                    <a href="/students/<%= student.id %>">
+                      <%- student.last_name %>, <%- student.first_name %></h5>
+                    </a>
+                  <p class="card-text">maybe put additional student info in here?</p>
+                  <% if (!student.has_pass) { %>
+                    <form action="/classrooms/hallpass-checkout" method="POST" id="hallpass-checkout">
+                        <input type="hidden" value="<%= student.id %>" name="currentStudent">
+                        <input type="hidden" value="<%= currentClassroom.id %>" name="thisClassroom">
+                         <button type="submit" class="btn btn-primary">hallpass checkout</button>
+                     </form>
+                 <% } else {%>
+                    <form action="/classrooms/hallpass-checkin?_method=PUT" method="POST" >
+                        <input type="hidden" value="<%= student.id %>" name="currentStudent">
+                        <input type="hidden" value="<%= currentClassroom.id %>" name="thisClassroom">
+                        <button type="submit" class="btn btn-warning">hallpass checkin</button>
+                     </form>
+                <% } %>
+                </div>
+              </div>
          <div class="student-info">
-             <div>
-                 <a href="/students/<%-student.id%>">
-                    <%- student.last_name %>, <%- student.first_name %> 
-                </a>
-             </div>
             <div class="student-delete-form">
                  <form action="/classrooms/remove-student?_method=DELETE" method="POST" id="student-delete">
                      <label for="remove-student"></label>
@@ -26,22 +45,8 @@
              </div>
              <% // if student is not currently on hallpass, allow timer start %>
              <div class="hallpass-forms">
-                 <% if (!student.has_pass) { %>
-                    <form action="/classrooms/hallpass-checkout" method="POST" id="hallpass-checkout">
-                        <input type="hidden" value="<%= student.id %>" name="currentStudent">
-                        <input type="hidden" value="<%= currentClassroom.id %>" name="thisClassroom">
-                         <button type="submit">hallpass checkout</button>
-                     </form>
-                 <% } else {%>
-                    <form action="/classrooms/hallpass-checkin?_method=PUT" method="POST" >
-                        <input type="hidden" value="<%= student.id %>" name="currentStudent">
-                        <input type="hidden" value="<%= currentClassroom.id %>" name="thisClassroom">
-                        <button type="submit">hallpass checkin</button>
-            
-                     </form>
-                <% } %>
+                 
              </div>
-             
         </div>
         <% }) %>
         <!-- form to add student from classroom page -->

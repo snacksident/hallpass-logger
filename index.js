@@ -43,12 +43,10 @@ app.get('/', async (req,res)=>{
     //get quote from api
     try {
         const dailyQuote = await axios.get('https://zenquotes.io/?api=today')
-        const quoteContent = dailyQuote.data[0].q
-        const quoteAuthor = dailyQuote.data[0].a
-        console.log(`${quoteContent}  -${quoteAuthor}`)
         res.render('home.ejs', {dailyQuote})
     } catch (error) {
         console.log(`error is ${error}`)
+        res.render('error.ejs')
     }
 })
 

@@ -127,12 +127,8 @@ router.put('/hallpass-checkin',async (req,res)=>{
     await studentsHallpass.update({
         end_time: new Date()
     })
-    //check hallpass back in - set students has_pass back to false
+    //reset the has_pass boolean for this student upon return
     await hallpassStudent.update({has_pass: false})
-
-    //need to get student a joke for returning to class
-    await getJoke()
-
     //reload current page
     res.redirect(`/classrooms/${parseInt(req.body.thisClassroom)}`)
 })
