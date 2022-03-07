@@ -1,10 +1,14 @@
 *{
-    background-color: antiquewhite
+    background-color: grey;
 }
 
 h1, h2, h3, h4{
     margin: auto;
     text-align: center;
+}
+
+.signup{
+    width: 50vw;
 }
 
 .student-container{
