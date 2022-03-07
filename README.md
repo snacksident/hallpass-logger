@@ -1,5 +1,7 @@
 # Hall Pass
 
+[current version of hallpass hosted on heroku](https://hallpass-loggr.herokuapp.com/)
+
 ## Concept
 
 * Teachers these days have enough on their plates - with managing in-class students, remote students, grading, curriculum... I could go on all day.  With this hallpass logging app, teachers will have one less thing to worry about!  Hallpass Loggr will provide at-a-glance information about which students are currently in the classroom and which are out on a break.  No more stressing about where a certain student is (in a lab, meeting with administration, on a bio break), just take a quick look at the app screen!
