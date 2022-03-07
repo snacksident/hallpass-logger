@@ -73,9 +73,26 @@
 
 * Node.js
 
+* Express and express ejs layouts
+
+* Axios for api requests
+
+* Crypto-js / bcrypt for encryption
+
 * Bootstrap components
+
+* Sequelize for database interaction
 
 * Bootswatch theme for hand-drawn look
 
 * zenquote.io api to provide daily inspirational quote
 
+* App hosting on Heroku
+
+## Post Project Reflections
+
+* Planning is EXTREMELY important and helpful - after a lot of tweaking and changes in the middle of development, I've learned the importance of a well-planned app.
+
+* Importance of focus:  I often found myself trying to tackle 3-4 steps of the project at once, but found the most success when I was able to lock down and get one piece of functionality done before moving onto the next.  It was tricky during the early stages of development, but as things got completed it was easier to take a step back and do one piece at a time.
+
+* 
