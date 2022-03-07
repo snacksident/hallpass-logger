@@ -2,9 +2,7 @@
 
 ## Concept
 
-*  After speaking with many teachers it seems that keeping track of which students are using the hallpass, and when each student is using a hallpass can quickly become a nightmare.  This HallPass app is here to help save some time and energy!  Each teacher will have access to each class they teach individually, as well as each student in those classes.  The teachers will be able to select a student in the class they're currently teaching to mark them as using the hall pass.   The time each student spends with the hall pass will be logged for easy viewing.
-
-* Teachers these days have enough of their plates - with managing in-class students, remote students, grading, curriculum...  With this hallpass logging app, teachers will have one less thing to worry about!  Hallpass Loggr will provide at-a-glance information about which students are currently in the classroom and which are out on a break.  No more stressing about where a certain student is (in a lab, meeting with administration, on a bio break), just take a quick look at the app screen!
+* Teachers these days have enough on their plates - with managing in-class students, remote students, grading, curriculum...  With this hallpass logging app, teachers will have one less thing to worry about!  Hallpass Loggr will provide at-a-glance information about which students are currently in the classroom and which are out on a break.  No more stressing about where a certain student is (in a lab, meeting with administration, on a bio break), just take a quick look at the app screen!
 
 ## user stories
 
