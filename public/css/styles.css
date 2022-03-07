@@ -1,16 +1,18 @@
 *{
-    background-color: antiquewhite
-}
-
-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+    background-color: grey;
 }
 
 h1, h2, h3, h4{
-    /* margin: auto; */
+    margin: auto;
     text-align: center;
+}
+
+.signup{
+    width: 50vw;
+}
+
+.student-container{
+    display: flex;
 }
 
 
@@ -18,5 +20,5 @@ h1, h2, h3, h4{
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
+    flex-direction: row;
 }

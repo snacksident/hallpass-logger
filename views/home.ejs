@@ -1,16 +1,50 @@
-<h1>you're home</h1>
-
 <!-- page to display if user IS NOT logged in -->
 <% if (!user) { %>
     <div class="container">
-        <h2>welcome to loggr - the hallpass tracking app!</h2>
-        <h3>get started by <a href="/users/new">creating an account</a> or <a href="/users/login">logging in</a></h3>
+        <div class="welcome col">
+            <h2>welcome to loggr - the hallpass tracking app!</h2>
+        </div>
+        <div class="image-display col">
+            <img src="https://placedog.net/500">
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="col">
+            <img src="https://placedog.net/501">
+        </div>
+        <div class="get-started">
+            <h3>get started by <a href="/users/new">creating an account</a> or <a href="/users/login">logging in</a></h3>
+        </div>
     </div>
 <!-- page to display if user IS logged in -->
 <% } else { %>
     <div class="container">
-        <h2>welcome back!</h2>
-        <h3>get started by <a href="/classrooms">creating your first classroom!</a></h3>
+        <div class="col welcome-back">
+            <h1>welcome back!</h1>
+            <h3><a href="/classrooms">view my classes</a></h3>
+        </div>
+        <div class="col">
+            <img src="https://placedog.net/499">
+        </div>
     </div>
-
 <% } %>
+<div class="container">
+    <div class="col quote-div">
+        <h3>some header</h3>
+        <h4>some more text</h4>
+    </div>
+    <div class="col">
+        <img src="https://placedog.net/480">
+    </div>
+</div>
+
+<div class="container">
+    <div class="col">
+        <img src="https://placedog.net/487">
+    </div>
+    <div class="col quote-div">
+        <h4>daily inspirational quote</h4>
+        <h4><%- dailyQuote.data[0].q%> -<%-dailyQuote.data[0].a %></h4>
+    </div>
+</div>
