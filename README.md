@@ -12,6 +12,30 @@
 
 * As a teacher of many classes, I want to be able to pick one student and look at their hall pass history
 
+## Installation Instructions
+- Fork and clone the code and run `npm i` 
+  <details>
+    <summary> NPM </summary>
+
+    - axios
+    - bcrypt
+    - bootswatch
+    - cookie-parser
+    - crypto-js
+    - dotenv
+    - ejs 
+    - express
+    - express-ejs-layouts
+    - method-override
+    - pg
+    - sequelize
+    - sequelize-cli
+
+  </details>
+
+- Run `createdb marvel_characters`
+- Run `sequelize db:migrate` to create the tables
+
 ## ERDs
 
 ![an ERD of my project](./hallpassERD.drawio.png)
@@ -96,3 +120,4 @@
 * Importance of focus:  I often found myself trying to tackle 3-4 steps of the project at once, but found the most success when I was able to lock down and get one piece of functionality done before moving onto the next.  It was tricky during the early stages of development, but as things got completed it was easier to take a step back and do one piece at a time.
 
 * I would love to re-shape this project into a general multi-purpose time tracker.  Rather than only having classrooms of students, I would like to simply have 'collections' of 'trackables' (log time spent at the gym, playing games, working on a certain task, etc) with the ability to add notes to reference on each 'log'
+
