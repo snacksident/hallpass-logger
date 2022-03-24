@@ -33,7 +33,6 @@
 
   </details>
 
-- Run `createdb marvel_characters`
 - Run `sequelize db:migrate` to create the tables
 
 ## ERDs
